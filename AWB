@@ -1,0 +1,641 @@
+title AWB
+@echo off
+color a
+:menu
+color a
+cls
+echo =========================
+echo Arena of the White Bear
+echo =========================
+echo.
+echo 1) Start
+echo 2) Load
+echo 3) Exit
+echo.
+set /p input=Enter:
+
+if %input% == 1 goto start
+if %input% == 2 goto load
+if %input% == 3 exit
+goto menu
+
+:start
+set level=1
+set health=100
+set money=50
+set exp=0
+set expmax=100
+set str=10
+set def=0
+set wep=0
+set wepdis=None
+set arm=0
+set armdis=None
+set hpots=2
+set spl=0
+set spldis=None
+cls
+echo Your name is Rosanna. You are a slave, but the Jarl of the North's End has
+echo offered you a chance to gain freedom, in exchange you make an interesting and
+echo gruesome display in the Arena of the White Bear. Go on, it is your chance,
+echo and nothing is going to wrench this away from you.
+
+pause >nul
+
+cls
+
+goto main
+
+:main
+if %exp% GEQ %expmax% goto levelup
+if %money% LSS 0 set money=0
+if %wep% == 1 set wepdis=Whip	
+if %wep% == 2 set wepdis=Axe
+if %wep% == 3 set wepdis=Greatsword
+if %wep% == 4 set wepdis=Bow
+if %wep% == 5 set wepdis=Flintlock Pistol
+if %wep% == 6 set wepdis=Hunter's Rifle
+if %wep% == 7 set wepdis=Dual Dagger
+if %wep% == 8 set wepdis=Crossbow
+if %wep% == 9 set wepdis=Dual Pistol
+if %wep% == 10 set wepdis=Inconel Staff
+if %wep% == 1 set str=11
+if %wep% == 2 set str=12
+if %wep% == 3 set str=17
+if %wep% == 4 set str=18
+if %wep% == 5 set str=15
+if %wep% == 6 set str=25
+if %wep% == 7 set str=26
+if %wep% == 8 set str=27
+if %wep% == 9 set str=30
+if %wep% == 10 set str=32
+if %wep% == 10 set def=%def% + 5
+if %arm% == 1 set armdis=Leather
+if %arm% == 2 set armdis=Iron
+if %arm% == 3 set armdis=Titanium
+if %arm% == 4 set armdis=Werewolf Silver
+if %arm% == 5 set armdis=Cursed Armor
+if %arm% == 6 set armdis=Bastard's Armor
+if %arm% == 7 set armdis=Holy Tunic
+if %arm% == 1 set def=1
+if %arm% == 2 set def=2
+if %arm% == 3 set def=3
+if %arm% == 4 set def=4
+if %arm% == 5 set def=12
+if %arm% == 5 set health=1
+if %arm% == 6 set def=6
+if %arm% == 7 set def=5
+if %arm% == 7 set health=115
+if %spl% == 1 set spldis=Fireball
+if %spl% == 2 set spldis=Thunder Bolt
+if %spl% == 3 set spldis=Holy Flame
+if %spl% == 1 set spl=4
+if %spl% == 2 set spl=6
+if %spl% == 3 set spl=5
+if %spl% == 3 set def=%def% + 5
+cls
+echo AWB
+echo --------------------------------------------------------------------------------
+echo Rosanna  Level:%level%   Money:$%money%
+echo Hp:%health%/100  Xp:%exp%/%expmax%
+echo Weapon:%wepdis% Armour:%armdis% Spell:%spldis%
+echo --------------------------------------------------------------------------------
+echo 1) Fight
+echo 2) Shop
+echo 3) Drink Potion
+echo 4) Statistics
+echo 5) Save
+echo 6) Exit
+echo.
+set /p input=Enter:
+
+if %input% == 1 goto fight1
+if %input% == 2 goto shop
+if %input% == 3 goto DP
+if %input% == 4 goto Statistics
+if %input% == 5 goto save
+if %input% == 6 goto exit
+goto main
+
+:Statistics
+cls
+echo Rosanna
+echo Strength: %str%
+echo Defense: %def%
+echo Level: %level%
+echo Experience: %exp%/%expmax%
+echo Weapon: %wepdis%
+echo Weapon Strength: %wep%
+echo Armour: %armdis%
+echo Armour Defense: %arm% 
+echo Spell: %spldis%
+echo Spell Damage: %spl%
+echo Health: %Health%
+echo Potions: %hpots%
+pause >nul
+goto main
+
+:DP
+cls
+echo AWB
+echo --------------------------------------------------------------------------------
+echo Rosanna  Level:%level%   Money:$%money%
+echo Hp:%health%/100  Xp:%exp%/%expmax%
+echo Weapon:%wepdis% Armour:%armdis% Spell:%spldis%
+echo --------------------------------------------------------------------------------
+echo 1)Drink Potion
+echo 2)Back
+echo.
+set /p input=Enter:
+
+if %input% == 1 (
+   if %hpots% geq 1 (
+      set /a hpots=%hpots%-1
+      set /a health=%health%+35
+   )
+)
+if %input% == 1 goto DP
+if %input% == 2 goto main
+
+:load
+if not exist Save.ini goto loaderror
+< Save.ini (
+set /p enehealth=
+set /p level=
+set /p health=
+set /p money=
+set /p exp=
+set /p expmax=
+set /p str=
+set /p def=
+set /p wep=
+set /p wepdis=
+set /p arm=
+set /p armdis=
+set /p hpots=
+set /p spl=
+set /p spldis=
+)
+goto main
+
+:loaderror
+cls
+echo No save file found...
+pause >nul
+goto menu
+
+:fight1
+set enehealth=70
+if %level% == 2 set enehealth=82
+if %level% == 3 set enehealth=83
+if %level% == 4 set enehealth=84
+if %level% == 5 set enehealth=85
+if %level% == 6 set enehealth=86
+if %level% == 7 set enehealth=87
+if %level% == 8 set enehealth=88
+if %level% == 9 set enehealth=90
+if %level% GTR 9 set enehealth=100
+
+:fight
+if %health% GTR 100 set health=%health%
+if %health% LSS 1 goto lose
+cls
+echo FIGHT
+echo --------------------------------------------------------------------------------
+echo Rosanna's Hp:%health%/100 Level:%level%
+echo Weapon:%wepdis%  Armour:%armdis% Spell:%spldis%
+echo --------------------------------------------------------------------------------
+echo Enemy
+echo Hp:%enehealth%/100
+echo.
+echo 1) Attack
+echo 2) Drink Potion
+echo 3) Spell
+echo 4) Flee
+echo.
+set /p input=Enter:
+
+if %input% == 1 goto attack
+if %input% == 2 goto potion
+if %input% == 3 goto spell
+if %input% == 4 goto flee
+goto fight
+
+:attack
+set num=%random:~-2%
+if %num% GTR %str% goto attack
+if %num% LSS 0 goto attack
+if %num% == 00 set num=0
+if %num% == 01 set num=1
+if %num% == 02 set num=2
+if %num% == 03 set num=3
+if %num% == 04 set num=4
+if %num% == 05 set num=5
+if %num% == 06 set num=6
+if %num% == 07 set num=7
+if %num% == 08 set num=0
+if %num% == 09 set num=7
+cls
+echo You take %num% health from
+echo the enemy.
+pause >nul
+set /a enehealth= %enehealth% - %num%
+set /a exp= %exp% + %num% * 2
+goto eneattack
+
+:eneattack
+if %enehealth% LSS 1 goto win
+set num=%random:~-1%
+if %num% GTR 7 goto eneattack
+if %num% LSS 0 goto eneattack
+set /a num= %num% - %def%
+if %num% LSS 0 set num=0
+cls
+echo The enemy takes %num% health
+echo from you.
+pause >nul
+set /a health= %health% - %num%
+goto fight
+
+:spell
+
+set num=%spl%
+if %num% GTR %str% goto attack
+if %num% LSS 0 goto attack
+if %num% == 00 set num=0
+if %num% == 01 set num=1
+if %num% == 02 set num=2
+if %num% == 03 set num=3
+if %num% == 04 set num=4
+if %num% == 05 set num=5
+if %num% == 06 set num=6
+if %num% == 07 set num=7
+if %num% == 08 set num=0
+if %num% == 09 set num=7
+cls
+echo You cast a spell and steal %num% health from
+echo the enemy.
+echo.
+pause >nul
+set /a enehealth= %enehealth% - %num%
+set /a exp= %exp% + %num% * 2
+goto eneattack
+
+:win
+set num=%random:~-2%
+if %num% GTR 35 goto win
+if %num% LSS 15 goto win
+cls
+echo Congratulations, you killed
+echo the enemy!
+echo.
+echo You found $%num%
+pause >nul
+set /a money= %money% + %num%
+goto main
+
+:lose
+cls
+color c
+echo Oh no, you died!
+echo.
+echo You will have to start again! Your save file has been deleted!
+del save.ini
+pause >nul
+goto menu
+
+:potion
+cls
+echo 1)Drink Potion
+echo 2)Back
+echo.
+set /p input=Enter:
+
+if %input% == 1 (
+   if %hpots% geq 1 (
+      set /a hpots=%hpots%-1
+      set /a health=%health%+35
+   )
+)
+if %input% == 1 goto fight
+if %input% == 2 goto fight
+
+:nopots2
+cls
+echo You have no potions left!
+pause >nul
+goto main
+
+:nopots
+cls
+echo You have no potions left!
+pause >nul
+goto fight
+
+:flee
+cls
+echo You run away!
+echo.
+echo -$30
+pause >nul
+set /a money= %money% - 30
+goto main
+
+:shop
+cls
+echo SHOP
+echo -------------------------------------------------------------------------------
+echo Rosanna
+echo Money:$%money% Level:%level%
+echo -------------------------------------------------------------------------------
+echo [a)Weapons]b)Armor]c)Potions]d)Spells
+echo.
+echo WARNING: Pay attention to the names of the
+echo objects you buy, because some give buffs
+echo and some require sacrifices!
+echo.
+echo 1) Whip             $30     Lvl: 1
+echo 2) Axe              $70     Lvl: 3
+echo 3) Greatsword       $150    Lvl: 6
+echo 4) Bow              $200    Lvl: 7
+echo 5) Flintlock Pistol $250    Lvl: 7
+echo 6) Hunter's Rifle   $300    Lvl: 8
+echo 7) Dual Daggers     $310    Lvl: 8
+echo 8) Crossbow         $325    Lvl: 8
+echo 9) Dual Pistols     $350    Lvl: 8
+echo 10) Inconel Staff   $375    Lvl: 9
+echo 11) Back
+echo.
+set /p input=Enter:
+
+if %input% == 11 goto main
+if %input% == a goto shop
+if %input% == b goto shop2
+if %input% == c goto shop3
+if %input% == d goto shop4
+if %money% LSS 30 goto nofunds
+if %input% == 1 set /a money= %money% - 30
+if %input% == 1 set wep=1
+if %input% == 1 goto shop
+if %level% LSS 3 goto nolev
+if %money% LSS 70 goto nofunds
+if %input% == 2 set /a money= %money% - 70
+if %input% == 2 set wep=2
+if %input% == 2 goto main
+if %level% LSS 6 goto nolev
+if %money% LSS 150 goto nofunds
+if %input% == 3 set /a money= %money% - 150
+if %input% == 3 set wep=3
+if %input% == 3 goto shop
+if %input% == 4 set /a money= %money% - 200
+if %input% == 4 set wep=4
+if %input% == 4 goto shop
+if %level% LSS 7 goto nolev
+if %money% LSS 200 goto nofunds
+if %input% == 5 set /a money= %money% - 250
+if %input% == 5 set wep=5
+if %input% == 5 goto shop
+if %level% LSS 7 goto nolev
+if %money% LSS 250 goto nofunds
+if %input% == 6 set /a money= %money% - 300
+if %input% == 6 set wep=6
+if %input% == 6 goto shop
+if %level% LSS 8 goto nolev
+if %money% LSS 300 goto nofunds
+if %input% == 7 set /a money= %money% - 310
+if %input% == 7 set wep=7
+if %input% == 7 goto shop
+if %level% LSS 8 goto nolev
+if %money% LSS 310 goto nofunds
+if %input% == 8 set /a money= %money% - 325
+if %input% == 8 set wep=8
+if %input% == 8 goto shop
+if %level% LSS 8 goto nolev
+if %money% LSS 325 goto nofunds
+if %input% == 9 set /a money= %money% - 350
+if %input% == 9 set wep=9
+if %input% == 9 goto shop
+if %level% LSS 8 goto nolev
+if %money% LSS 350 goto nofunds
+if %input% == 10 set /a money= %money% - 375
+if %input% == 10 set wep=10
+if %input% == 10 goto shop
+if %level% LSS 9 goto nolev
+if %money% LSS 375 goto nofunds
+goto shop
+
+:shop2
+cls
+echo SHOP
+echo -------------------------------------------------------------------------------
+echo Rosanna
+echo Money:$%money% Level:%level%
+echo -------------------------------------------------------------------------------
+echo [a)Weapons]b)Armor]c)Potions]d)Spells
+echo.
+echo WARNING: Pay attention to the names of the
+echo objects you buy, because some give buffs
+echo and some require sacrifices!
+echo.
+echo 1) Leather          $50     Lvl: 1
+echo 2) Iron             $90     Lvl: 3
+echo 3) Titanium         $200    Lvl: 4
+echo 4) Werewolf Silver  $275    Lvl: 5
+echo 5) Cursed Armor     $350    Lvl: 6
+echo 6) Bastard's Armor  $360    Lvl: 6
+echo 7) Holy Tunic       $400    Lvl: 7
+echo 8) Back
+echo.
+set /p input=Enter:
+
+if %input% == 8 goto main
+if %input% == a goto shop
+if %input% == b goto shop2
+if %input% == c goto shop3
+if %input% == d goto shop4
+if %money% LSS 50 goto nofunds
+if %input% == 1 set /a money= %money% - 50
+if %input% == 1 set arm=1
+if %input% == 1 goto shop2
+if %level% LSS 3 goto nolev
+if %money% LSS 90 goto nofunds
+if %input% == 2 set /a money= %money% - 90
+if %input% == 2 set arm=2
+if %input% == 2 goto shop2
+if %level% LSS 6 goto nolev
+if %money% LSS 200 goto nofunds
+if %input% == 3 set /a money= %money% - 200
+if %input% == 3 set arm=3
+if %input% == 3 goto shop2
+if %input% == 4 set /a money= %money% - 275
+if %input% == 4 set arm=4
+if %input% == 4 goto shop2
+if %level% LSS 8 goto nolev
+if %money% LSS 275 goto nofunds
+if %input% == 5 set /a money= %money% - 350
+if %input% == 5 set arm=5
+if %input% == 5 goto shop2
+if %level% LSS 6 goto nolev
+if %money% LSS 350 goto nofunds
+if %input% == 6 set /a money= %money% - 360
+if %input% == 6 set arm=6
+if %input% == 6 goto shop2
+if %level% LSS 6 goto nolev
+if %money% LSS 360 goto nofunds
+if %input% == 7 set /a money= %money% - 400
+if %input% == 7 set arm=7
+if %input% == 7 goto shop2
+if %level% LSS 7 goto nolev
+if %money% LSS 360 goto nofunds
+goto shop2
+
+:shop3
+cls
+echo SHOP
+echo ----------------------------------------------------------------------------
+echo Rosanna
+echo Money:$%money% Level:%level%
+echo ----------------------------------------------------------------------------
+echo [a)Weapons[b)Armour[c)Potions]d)Spells
+echo.
+echo WARNING: Level potions will be drunk
+echo immediately!
+echo.
+echo 1) Health Potion    $30
+echo 2) Level Potion     $1000
+echo 3) Back
+echo.
+echo.
+set /p input=Enter:
+
+if %input% == 3 goto main
+if %input% == a goto shop
+if %input% == b goto shop2
+if %input% == c goto shop3
+if %input% == d goto shop4
+if %money% LSS 30 goto nofunds
+if %input% == 1 set /a money= %money% - 30
+if %input% == 1 set hpots= %hpots% + 1
+if %input% == 1 goto shop3
+if %money% LSS 1000 goto nofunds
+if %input% == 2 set /a money= %money% - 1000
+if %input% == 2 set /a exp= %exp% + 500
+if %input% == 2 goto shop3
+if %input% == 3 goto main
+goto shop3
+
+:shop4
+cls
+echo SHOP
+echo -------------------------------------------------------------------------------
+echo Rosanna
+echo Money:$%money% Level:%level%
+echo -------------------------------------------------------------------------------
+echo [a)Weapons[b)Armour[c)Potions]d)Spells
+echo.
+echo WARNING: Pay attention to the names of the
+echo objects you buy, because some give buffs
+echo and some require sacrifices!
+echo.
+echo 1) Fireball     $50     Lvl: 1
+echo 2) Thunder Bolt $150    Lvl: 2
+echo 3) Holy Flame   $300    Lvl: 3
+echo 4) Back
+echo.
+echo.
+set /p input=Enter:
+if %input% == 4 goto main
+if %input% == a goto shop
+if %input% == b goto shop2
+if %input% == c goto shop3
+if %input% == d goto shop4
+if %money% LSS 50 goto nofunds
+if %input% == 1 set /a money= %money% - 50
+if %input% == 1 set spl=5
+if %input% == 1 set spldis=Fireball
+if %input% == 1 goto shop4
+if %level% LSS 1 goto nolev
+if %money% LSS 150 goto nofunds
+if %input% == 2 set /a money= %money% - 150
+if %input% == 2 set spl=10
+if %input% == 2 set spldis=Thunder Bolt
+if %input% == 2 goto shop4
+if %level% LSS 2 goto nolev
+if %money% LSS 300 goto nofunds
+if %input% == 3 set /a money= %money% - 300
+if %input% == 3 set spl=5
+if %input% == 3 set spldis=Holy Flame
+if %input% == 3 goto shop4
+goto shop4
+
+:nofunds
+cls
+echo You don't have enough money
+echo to purchase this item.
+pause >nul
+goto main
+
+:nolev
+cls
+echo Your level isn't high enough
+echo to purchase this item.
+pause >nul
+goto main
+
+:save
+(
+echo %enehealth%
+echo %level%
+echo %health%
+echo %money%
+echo %exp%
+echo %expmax%
+echo %str%
+echo %def%
+echo %wep%
+echo %wepdis%
+echo %arm%
+echo %armdis%
+echo %hpots%
+echo %spl%
+echo %spldis%) >Save.ini
+cls
+echo Game Saved!
+pause >nul
+goto main
+
+:exit
+cls
+echo All unsaved progress will be
+echo lost, are you sure? (Y/N)
+set /p input=
+
+if %input% == y exit
+if %input% == n goto main
+if %input% == Y exit
+if %input% == N goto main
+goto exit
+pause >nul
+exit
+
+:levelup
+set /a level= %level% + 1
+set exp=0
+set /a expmax= %expmax% * 150 / 100
+if %level% == 2 goto story1
+cls
+echo Congratulations!
+echo.
+echo You are now level %level%!
+echo.
+pause >nul
+goto main
+
+:story1
+cls
+echo The Jarl and his advisor, stare at you, with the advisor perplexed
+echo and paralysed with a mouth so wide it looks like he has unhinged his jaw.
+echo However, the Jarl just smirks and turns away. You'll have to do better than that!
+echo.
+pause >nul
+goto main
