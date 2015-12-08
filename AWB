@@ -4,9 +4,9 @@ color a
 :menu
 color a
 cls
-echo =========================
+echo =*=*=*=*=*=*=*=*=*=*=*=*=
 echo Arena of the White Bear
-echo =========================
+echo =*=*=*=*=*=*=*=*=*=*=*=*=
 echo.
 echo 1) Start
 echo 2) Load
@@ -206,7 +206,7 @@ echo Rosanna's Hp:%health%/100 Level:%level%
 echo Weapon:%wepdis%  Armour:%armdis% Spell:%spldis%
 echo --------------------------------------------------------------------------------
 echo Enemy
-echo Hp:%enehealth%/100
+echo Hp: %enehealth%/100
 echo.
 echo 1) Attack
 echo 2) Drink Potion
@@ -427,16 +427,16 @@ goto shop
 :shop2
 cls
 echo SHOP
-echo -------------------------------------------------------------------------------
-echo Rosanna
-echo Money:$%money% Level:%level%
-echo -------------------------------------------------------------------------------
+echo -------------------------------------------------------------------------------|
+echo Rosanna                                                                        |
+echo Money:$%money% Level:%level%                                                   |
+echo -------------------------------------------------------------------------------|
 echo [a)Weapons]b)Armor]c)Potions]d)Spells
 echo.
 echo WARNING: Pay attention to the names of the
 echo objects you buy, because some give buffs
 echo and some require sacrifices!
-echo.
+echo -------------------------------------------------------------------------------
 echo 1) Leather          $50     Lvl: 1
 echo 2) Iron             $90     Lvl: 3
 echo 3) Titanium         $200    Lvl: 4
@@ -492,10 +492,10 @@ goto shop2
 :shop3
 cls
 echo SHOP
-echo ----------------------------------------------------------------------------
-echo Rosanna
-echo Money:$%money% Level:%level%
-echo ----------------------------------------------------------------------------
+echo ----------------------------------------------------------------------------|
+echo Rosanna                                                                     |
+echo Money:$%money% Level:%level%                                                |
+echo ----------------------------------------------------------------------------|
 echo [a)Weapons[b)Armour[c)Potions]d)Spells
 echo.
 echo WARNING: Level potions will be drunk
@@ -527,10 +527,10 @@ goto shop3
 :shop4
 cls
 echo SHOP
-echo -------------------------------------------------------------------------------
-echo Rosanna
-echo Money:$%money% Level:%level%
-echo -------------------------------------------------------------------------------
+echo -------------------------------------------------------------------------------|
+echo Rosanna                                                                        |
+echo Money:$%money% Level:%level%                                                   | 
+echo -------------------------------------------------------------------------------|
 echo [a)Weapons[b)Armour[c)Potions]d)Spells
 echo.
 echo WARNING: Pay attention to the names of the
